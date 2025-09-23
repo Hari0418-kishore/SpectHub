@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,3 +127,38 @@ import os
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
+import dj_database_url
+import os
+
+INSTALLED_APPS = [
+    ...
+    'cloudinary',
+    'cloudinary_storage',
+    ...
+]
+
+# Cloudinary Media Settings
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Cloudinary Config
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('Cdy5txulrm'),
+    'API_KEY': os.getenv('356424946634654'),
+    'API_SECRET': os.getenv('EQR1ILFXLpgVNmR4bffL5lmPxrM'),
+}
+
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_URL = '/static/'
+
+# Add this line for production
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Optional: WhiteNoise for serving static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
