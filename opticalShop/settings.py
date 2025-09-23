@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [
@@ -133,12 +135,6 @@ import cloudinary.api
 import dj_database_url
 import os
 
-INSTALLED_APPS = [
-    ...
-    'cloudinary',
-    'cloudinary_storage',
-    ...
-]
 
 # Cloudinary Media Settings
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
