@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Find Your Perfect Glass</title>
+
+  <!-- Google Fonts for stylish typography -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Font Awesome 6 -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg1: #0f172a; /* slate-900 */
+      --bg2: #1e293b; /* slate-800 */
+      --accent: #8b5cf6; /* violet-500 */
+      --accent-2: #22d3ee; /* cyan-400 */
+      --text: #e2e8f0; /* slate-200 */
+    }
+
+    body {
+      font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+      color: var(--text);
+      background: radial-gradient(1200px 800px at 10% 10%, #111827 0%, #0b1220 45%, #050b14 100%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .navbar {
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 6rem 0 4rem;
+      background: radial-gradient(900px 500px at 80% -20%, rgba(139, 92, 246, 0.25), transparent 60%),
+                  radial-gradient(700px 400px at -10% 110%, rgba(34, 211, 238, 0.18), transparent 60%);
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: -20% -10% auto -10%;
+      height: 120%;
+      border-radius: 50%;
+      background: radial-gradient(closest-side, rgba(34, 211, 238, 0.08), transparent);
+      pointer-events: none;
+      filter: blur(60px);
+    }
+
+    .headline {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      line-height: 1.1;
+      font-size: clamp(2rem, 5vw + 1rem, 4rem);
+      background: linear-gradient(135deg, #ffffff 0%, #dbeafe 40%, #a5b4fc 75%, #e879f9 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 24px rgba(168, 85, 247, 0.15);
+    }
+
+    .subhead {
+      max-width: 680px;
+      color: #cbd5e1;
+    }
+    
+
+    .glass-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+      backdrop-filter: blur(12px);
+      border-radius: 1.5rem;
+    }
+
+    .search-wrap .form-control {
+      padding: 0.9rem 1.2rem 0.9rem 3rem;
+      background: rgba(2, 6, 23, 0.6);
+      color: var(--text);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 1rem;
+    }
+
+    .search-wrap .form-control::placeholder { color: #94a3b8; }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.85;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border: none;
+      color: #0b1020;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      border-radius: 0.9rem;
+      box-shadow: 0 10px 25px rgba(139, 92, 246, 0.35);
+    }
+
+    .btn-gradient:hover { filter: brightness(1.08); }
+
+    .features i { font-size: 1.25rem; }
+
+    .category-pill {
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      border-radius: 999px;
+      padding: 0.6rem 1rem;
+      color: #e5e7eb;
+      transition: transform 120ms ease;
+      background: rgba(15, 23, 42, 0.4);
+    }
+
+    .category-pill:hover { transform: translateY(-2px); }
+
+    footer { color: #94a3b8; }
+    
+  .glass-card.p-3.h-100 img {
+    height: 120px;
+    width: 120px;
+    object-fit: contain;
+    margin-bottom: 1rem;
+  }
+
+  .glass-card.p-3.h-100 h5 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .glass-card.p-3.h-100 p {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .glass-card.p-3.h-100 {
+    padding: 1rem !important;
+    border-radius: 1rem;
+  }
+
+  .btn-gradient.w-100 {
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
+  }
+  .modal-content {
+  animation: modalPop 0.4s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes modalPop {
+  0% { transform: scale(0.95); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+    
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <i class="fa-solid fa-glasses" style="color: #22d3ee;"></i>
+        <span class="brand-badge">SPECTHUB</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link text-light" href="#categories">Categories</a></li>
+          <li class="nav-item"><a class="nav-link text-light" href="#why-us">Why Us</a></li>
+          <li class="nav-item"><a class="nav-link text-light" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% if messages %}
+  <div class="container mt-3">
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="container">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <h1 class="headline mb-3">Find Your Perfect Glass</h1>
+          <p class="subhead mb-4">Upgrade your vision and your style with curated frames, premium lenses, and try‑on comfort. Discover eyewear that fits your face and your vibe.</p>
+
+          <div class="glass-card p-4 p-md-5 mb-4">
+            <form id="searchForm" class="search-wrap position-relative d-flex flex-column flex-sm-row gap-3">
+              <div class="position-relative flex-grow-1">
+                <i class="fa-solid fa-magnifying-glass input-icon"></i>
+                <input id="searchInput" class="form-control" type="search" placeholder="Search frames, brands, or styles" name="q" id="searchInput"  aria-label="Search" autocomplete="off"/>
+                <div id="suggestionsBox" class="list-group position-absolute w-100" style="z-index: 1000; display: none; max-height: 250px; overflow-y: auto;"></div>
+              </div>
+              <button class="btn btn-gradient px-4 py-3">
+                <i class="fa-solid fa-wand-magic-sparkles me-2"></i>
+                Find now
+              </button>
+            </form>
+            <div class="d-flex gap-2 flex-wrap mt-3">
+              <span class="category-pill"><i class="fa-solid fa-sun me-2"></i> Sunglasses</span>
+              <span class="category-pill"><i class="fa-solid fa-laptop me-2"></i> Blue‑cut</span>
+              <span class="category-pill"><i class="fa-regular fa-gem me-2"></i> Premium</span>
+              <span class="category-pill"><i class="fa-solid fa-child-reaching me-2"></i> Kids</span>
+            </div>
+          </div>
+
+          <div class="features row g-3 g-md-4">
+            <div class="col-6 col-md-4">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-truck-fast"></i>
+                <span>Fast Delivery</span>
+              </div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-rotate"></i>
+                <span>Easy Returns</span>
+              </div>
+            </div>
+            <div class="col-6 col-md-4">
+              <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-shield-heart"></i>
+                <span>Quality Assured</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="glass-card p-4 p-md-5 h-100 d-flex flex-column justify-content-center">
+            <div class="text-center mb-3">
+              <i class="fa-solid fa-glasses" style="font-size:3rem;"></i>
+            </div>
+            <h3 class="text-center mb-2">Virtual Try‑On Ready</h3>
+            <p class="text-center mb-4">Plug in your favorite try‑on tool or showcase featured frames here. This spotlight card uses a subtle glass effect to pop on dark backgrounds.</p>
+            <div class="d-flex justify-content-center gap-2">
+              <a href="#" class="btn btn-outline-light px-4 py-2 rounded-3"><i class="fa-regular fa-eye me-2"></i>Preview</a>
+              <a href="#" class="btn btn-gradient px-4 py-2 rounded-3"><i class="fa-solid fa-cart-shopping me-2"></i> Shop Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+<!-- Categories -->
+<section id="categories" class="py-5">
+  <div class="container">
+    <div class="row g-4">
+      {% for cat in categories %}
+      <div class="col-md-4">
+        <div class="glass-card p-4 h-100">
+          <div class="d-flex align-items-center gap-3 mb-2">
+            <i class="{{ cat.icon }}"></i>
+            <h5 class="mb-0">{{ cat.name }}</h5>
+          </div>
+          <p class="mb-0">{{ cat.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<!--<div class="features row g-3 g-md-4">
+  {% for f in features %}
+  <div class="col-6 col-md-4">
+    <div class="d-flex align-items-center gap-2">
+      <i class="{{ f.icon }}"></i>
+      <span>{{ f.text }}</span>
+    </div>
+  </div>
+  {% endfor %}
+</div> -->
+
+
+  <!-- Why Us -->
+  <section id="why-us" class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="glass-card p-4 p-md-5 h-100">
+            <h4 class="mb-3"><i class="fa-solid fa-crown me-2"></i> Why Choose Us</h4>
+            <ul class="mb-0 ps-3">
+              <li class="mb-2">Handpicked frames from trusted brands</li>
+              <li class="mb-2">Accurate prescriptions and lens options</li>
+              <li class="mb-2">Care tips and after‑sale support</li>
+              <li>Great prices, even better service</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="glass-card p-4 p-md-5 h-100">
+            <h4 class="mb-3"><i class="fa-solid fa-wand-magic-sparkles me-2"></i> Style Quiz</h4>
+            <p class="mb-3">Not sure what fits your face shape? Start with our quick quiz to find frames that flatter you.</p>
+            <a class="btn btn-gradient px-4 py-2" href="#"><i class="fa-regular fa-circle-play me-2"></i> Take the quiz</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Featured Products -->
+<section id="products" class="py-5">
+  <div class="container">
+    <h3 class="mb-4 text-center">Featured Frames</h3>
+    <div class="row g-4">
+      {% for p in featured_products %}
+      <div class="col-md-4">
+        <div class="glass-card p-3 h-100">
+          <img src="{{ p.image.url }}" class="img-fluid rounded mb-3" alt="{{ p.name }}">
+          <h5>{{ p.name }}</h5>
+          <p>{{ p.description|truncatewords:15 }}</p>
+          <p><strong>₹{{ p.price }}</strong></p>
+          <a href="#" class="btn btn-gradient w-100 view-product-btn" 
+   data-product-id="{{ p.id }}"
+   data-name="{{ p.name }}"
+   data-description="{{ p.description }}"
+   data-price="{{ p.price }}"
+   data-image="{{ p.image.url }}">
+   View
+</a>
+
+        </div>
+      </div>
+      {% empty %}
+      <p class="text-center">No products available yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Add this after your Featured Frames section -->
+<div class="text-center mt-4">
+  <button class="btn btn-gradient px-4 py-2" id="seeMoreBtn">
+  See More <i class="fa-solid fa-arrow-right ms-2"></i>
+</button>
+
+</div>
+
+
+
+  <!-- Footer -->
+  <footer id="contact" class="py-4 border-top border-secondary-subtle">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+      <div>
+        <span class="brand-badge">SPECTHUB</span>
+        <span class="ms-2">© <span id="year"></span> • All rights reserved</span>
+      </div>
+      <div class="d-flex gap-3">
+        <a class="text-decoration-none text-light" href="#"><i class="fab fa-instagram"></i></a>
+        <a class="text-decoration-none text-light" href="#"><i class="fab fa-facebook"></i></a>
+        <a class="text-decoration-none text-light" href="#"><i class="fab fa-x-twitter"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  
+ 
+
+  
+<!-- See More Modal -->
+<div class="modal fade" id="seeMoreModal" tabindex="-1" aria-labelledby="seeMoreModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content" style="background: #0f172a;">
+      <div class="modal-header border-0">
+        <h5 class="modal-title brand-badge" id="seeMoreModalLabel">Browse All Spects</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body d-flex" style="min-height: 80vh;">
+        <!-- Sidebar: Categories -->
+        <div class="border-end pe-3" style="width: 260px; min-width: 200px;">
+          <h6 class="mb-3 text-light">Categories</h6>
+          <ul class="nav flex-column gap-2">
+            {% for cat in categories %}
+            <li>
+              <a href="#" class="nav-link text-light category-link" data-category="{{ cat.id }}">
+                <i class="{{ cat.icon }} me-2"></i>{{ cat.name }}
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <!-- Products Grid -->
+        <div class="flex-grow-1 ps-4">
+          <div id="category-products">
+            {% for cat in categories %}
+            <div class="category-products-list" data-category="{{ cat.id }}" style="{% if not forloop.first %}display:none;{% endif %}">
+              <h5 class="mb-4 brand-badge">{{ cat.name }}</h5>
+              <div class="row g-4">
+                {% for p in products %}
+                  {% if p.category.id == cat.id %}
+                  <div class="col-md-4">
+                    <div class="glass-card p-3 h-100">
+                      <img src="{{ p.image.url }}" class="img-fluid rounded mb-3" alt="{{ p.name }}" style="height:100px;width:100px;object-fit:contain;">
+                      <h6>{{ p.name }}</h6>
+                      <p style="font-size:0.9rem;">{{ p.description|truncatewords:12 }}</p>
+                      <p><strong>₹{{ p.price }}</strong></p>
+                      <a href="#" class="btn btn-gradient w-100 view-product-btn" 
+   data-product-id="{{ p.id }}"
+   data-name="{{ p.name }}"
+   data-description="{{ p.description }}"
+   data-price="{{ p.price }}"
+   data-image="{{ p.image.url }}">
+   View
+</a>
+
+                    </div>
+                  </div>
+                  {% endif %}
+                {% empty %}
+                  <p class="text-center">No products in this category.</p>
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Product View Modal -->
+<div class="modal fade" id="productViewModal" tabindex="-1" aria-labelledby="productViewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow" style="background: linear-gradient(135deg, #1e293b 80%, #0f172a 100%); color: #e2e8f0;">
+      <div class="modal-header border-0" style="background: linear-gradient(90deg, #131217 0%, #22d3ee 100%); color: #fff;">
+        <h5 class="modal-title brand-badge" id="productViewTitle"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body d-flex flex-column flex-md-row gap-4 align-items-center">
+        <img id="productViewImage" src="" class="img-fluid rounded shadow" style="max-height: 220px; object-fit: contain; border: 3px solid #8b5cf6;">
+        <div class="w-100">
+          <p id="productViewDescription" class="mb-3" style="font-size: 1.1rem; color: #cbd5e1;"></p>
+          <h5 class="mb-3" style="color: #22d3ee; font-weight: 700;">₹<span id="productViewPrice"></span></h5>
+          <button class="btn btn-gradient px-4 py-2" id="openOrderModal">Book Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+ <!-- Order Form Modal -->
+<div class="modal fade" id="orderFormModal" tabindex="-1" aria-labelledby="orderFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow" style="background: linear-gradient(135deg, #1e293b 80%, #0f172a 100%); color: #e2e8f0;">
+      <div class="modal-header border-0" style="background: linear-gradient(90deg, #8b5cf6 0%, #22d3ee 100%); color: #fff;">
+        <h5 class="modal-title brand-badge" id="orderFormModalLabel">Book Your Glasses</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="{% url 'place_order' %}">
+        {% csrf_token %}
+        <div class="modal-body">
+          <input type="hidden" name="product_id" id="orderProductId">
+          <div class="mb-3">
+            <label class="form-label" style="color: #8b5cf6;">Full Name</label>
+            <input type="text" class="form-control" name="name" required style="background: #0f172a; color: #e2e8f0; border: 1px solid #8b5cf6;">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" style="color: #22d3ee;">Phone Number</label>
+            <input type="text" class="form-control" name="phone" required style="background: #0f172a; color: #e2e8f0; border: 1px solid #22d3ee;">
+          </div>
+          <div class="mb-3">
+            <label class="form-label" style="color: #8b5cf6;">Address</label>
+            <textarea class="form-control" name="address" rows="3" required style="background: #0f172a; color: #e2e8f0; border: 1px solid #8b5cf6;"></textarea>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" style="color: #22d3ee;">Additional Notes</label>
+            <textarea class="form-control" name="notes" rows="2" style="background: #0f172a; color: #e2e8f0; border: 1px solid #22d3ee;"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer border-0">
+          <button type="submit" class="btn btn-gradient px-4 py-2">Submit Booking</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Add this script at the end of your body to handle category switching -->
+ <!--<script>
+// Set a JS variable using Django template
+var isAuthenticated = "{{ user.is_authenticated|yesno:'true,false' }}" === "true";
+
+document.getElementById('seeMoreBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  if (isAuthenticated) {
+    var seeMoreModal = new bootstrap.Modal(document.getElementById('seeMoreModal'));
+    seeMoreModal.show();
+  } else {
+    var authModal = new bootstrap.Modal(document.getElementById('authModal'));
+    authModal.show();
+  }
+});
+</script>-->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // SEE MORE button (always open products modal)
+    var seeMoreBtn = document.getElementById('seeMoreBtn');
+    if (seeMoreBtn) {
+      seeMoreBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var seeMoreModal = new bootstrap.Modal(document.getElementById('seeMoreModal'));
+        seeMoreModal.show();
+      });
+    }
+
+    // BOOK NOW buttons
+     //document.querySelectorAll('.book-now-btn').forEach(function(btn) {
+      //btn.addEventListener('click', function(e) {
+       // e.preventDefault();
+       // var productId = this.getAttribute('data-product-id');
+        //document.getElementById('orderProductId').value = productId;
+       // var orderModal = new bootstrap.Modal(document.getElementById('orderFormModal'));
+       // orderModal.show();
+      //});
+   // });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // VIEW button → opens product modal
+    document.querySelectorAll('.view-product-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // fill modal with product data
+        document.getElementById('productViewTitle').innerText = this.getAttribute('data-name');
+        document.getElementById('productViewDescription').innerText = this.getAttribute('data-description');
+        document.getElementById('productViewPrice').innerText = this.getAttribute('data-price');
+        document.getElementById('productViewImage').src = this.getAttribute('data-image');
+        document.getElementById('openOrderModal').setAttribute('data-product-id', this.getAttribute('data-product-id'));
+        new bootstrap.Modal(document.getElementById('productViewModal')).show();
+      });
+    });
+    document.getElementById('openOrderModal').addEventListener('click', function(e) {
+      var productId = this.getAttribute('data-product-id');
+      document.getElementById('orderProductId').value = productId;
+      new bootstrap.Modal(document.getElementById('orderFormModal')).show();
+      bootstrap.Modal.getInstance(document.getElementById('productViewModal')).hide();
+    });
+  });
+  </script>
+
+
+
+<script>
+ 
+  document.querySelectorAll('.category-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var catId = this.getAttribute('data-category');
+      document.querySelectorAll('.category-products-list').forEach(function(list) {
+        list.style.display = list.getAttribute('data-category') === catId ? 'block' : 'none';
+      });
+    });
+  });
+</script>
+<script>
+const searchInput = document.getElementById("searchInput");
+const suggestionsBox = document.getElementById("suggestionsBox");
+
+searchInput.addEventListener("input", function() {
+  const query = this.value.trim();
+  if (query.length < 2) {
+    suggestionsBox.style.display = "none";
+    return;
+  }
+
+  fetch(`/search-suggestions/?q=${encodeURIComponent(query)}`)
+    .then(res => res.json())
+    .then(data => {
+      suggestionsBox.innerHTML = "";
+      if (data.results.length > 0) {
+        data.results.forEach(item => {
+          const div = document.createElement("a");
+          div.classList.add("list-group-item", "list-group-item-action");
+          div.innerHTML = item.type === "product"
+            ? `<img src="${item.image}" style="height:25px;width:25px;object-fit:cover;" class="me-2"> ${item.name}`
+            : `<i class="fa-solid fa-list me-2"></i> ${item.name}`;
+          
+          div.href = "#";
+          div.addEventListener("click", function(e) {
+            e.preventDefault();
+            searchInput.value = item.name;
+            suggestionsBox.style.display = "none";
+
+            // If product → open modal
+            if (item.type === "product") {
+              fetch(`/search/?q=${encodeURIComponent(item.name)}`)
+                .then(r => r.json())
+                .then(d => {
+                  if (d.status === "product") {
+                    const modalHtml = `
+                      <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title">${d.name}</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body d-flex gap-3">
+                              <img src="${d.image}" class="img-fluid" style="max-width:200px;">
+                              <div>
+                                <p>${d.description}</p>
+                                <p><strong>₹${d.price}</strong></p>
+                                <a href="#" class="btn btn-gradient book-now-btn" data-product-id="${d.id}">Book Now</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    `;
+                    const old = document.getElementById("productModal");
+                    if (old) old.remove();
+                    document.body.insertAdjacentHTML("beforeend", modalHtml);
+                    new bootstrap.Modal(document.getElementById("productModal")).show();
+                  }
+                });
+            }
+            // If category → open See More modal and switch
+            else if (item.type === "category") {
+              var seeMoreModal = new bootstrap.Modal(document.getElementById('seeMoreModal'));
+              seeMoreModal.show();
+              document.querySelectorAll('.category-products-list').forEach(function(list) {
+                list.style.display = list.getAttribute('data-category') == item.id ? 'block' : 'none';
+              });
+            }
+          });
+          suggestionsBox.appendChild(div);
+        });
+        suggestionsBox.style.display = "block";
+      } else {
+        suggestionsBox.style.display = "none";
+      }
+    });
+});
+
+// Hide suggestions if clicked outside
+document.addEventListener("click", function(e) {
+  if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+    suggestionsBox.style.display = "none";
+  }
+});
+</script>
+
+</body>
+</html>

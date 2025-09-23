@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer Leads</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+  <div class="container py-5">
+    <h2 class="mb-4">Customer Leads</h2>
+
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <table class="table table-bordered table-hover align-middle">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Customer Name</th>
+              <th>Phone</th>
+              <th>Product</th>
+              <th>Address</th>
+              <th>Notes</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for lead in leads %}
+            <tr>
+              <td>{{ lead.id }}</td>
+              <td>{{ lead.name }}</td>
+              <td>{{ lead.phone }}</td>
+              <td>{{ lead.product.name }}</td>
+              <td>{{ lead.address }}</td>
+              <td>{{ lead.notes|default:"-" }}</td>
+              <td>{{ lead.created_at|date:"Y-m-d H:i" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+              <td colspan="7" class="text-center">No leads yet</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
